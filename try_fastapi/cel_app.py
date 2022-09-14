@@ -1,4 +1,4 @@
-import time
+import json
 from celery import Celery
 import requests
 
@@ -9,7 +9,7 @@ celery_app = Celery('worker', backend='rpc://', broker='amqp://localhost')
 @celery_app.task()
 def fetch_response():
     response = requests.get('http://127.0.0.1:8002/user')
-    return response.status_code
+    return response.json()
 
 
 def get_status(task_id):

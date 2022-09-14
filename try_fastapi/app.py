@@ -8,9 +8,7 @@ app = FastAPI()
 @app.get('/')
 def adding_task():
     response = fetch_response.delay()
-    time.sleep(1)
-    status = get_status(response.id)
-    return status
+    return response.id
 
 
 @app.get('/status')
